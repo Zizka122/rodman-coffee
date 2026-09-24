@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RODMAN Coffee — кофейня в Пятигорске</title>
+  <meta name="description" content="RODMAN Coffee — кофейня и кондитерская на проспекте Кирова, 87А в Пятигорске. Авторские рафы, лимонады, десерты, летняя веранда и атмосфера, ради которой возвращаются.">
+  <meta name="theme-color" content="#120d0a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23120d0a'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='38' fill='%23ff3b2f'%3ER%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+  <!-- ============ PRELOADER: чашка сверху, построенная как чертёж ============ -->
+  <div class="loader" aria-hidden="true">
+    <svg class="loader__svg" viewBox="0 0 400 400">
+      <g class="loader__guides">
+        <line x1="-200" y1="200" x2="600" y2="200"/>
+        <line x1="200" y1="-200" x2="200" y2="600"/>
+        <line x1="-200" y1="80" x2="600" y2="80"/>
+        <line x1="-200" y1="320" x2="600" y2="320"/>
+        <line x1="80" y1="-200" x2="80" y2="600"/>
+        <line x1="320" y1="-200" x2="320" y2="600"/>
+      </g>
+      <circle class="loader__saucer" cx="200" cy="200" r="150"/>
+      <circle class="loader__rim" cx="200" cy="200" r="120"/>
+      <path class="loader__handle" d="M320 185 C 362 185, 362 215, 320 215"/>
+      <circle class="loader__coffee" cx="200" cy="200" r="104"/>
+      <circle class="loader__crema" cx="200" cy="200" r="104"/>
+      <path class="loader__art" d="M200 262 C 150 225, 140 180, 170 162 C 188 152, 200 168, 200 178 C 200 168, 212 152, 230 162 C 260 180, 250 225, 200 262 Z"/>
+      <g class="loader__handles">
+        <rect x="196" y="76" width="8" height="8"/><rect x="196" y="316" width="8" height="8"/>
+        <rect x="76" y="196" width="8" height="8"/><rect x="316" y="196" width="8" height="8"/>
+        <line x1="150" y1="80" x2="250" y2="80"/><line x1="150" y1="320" x2="250" y2="320"/>
+        <circle cx="150" cy="80" r="3"/><circle cx="250" cy="80" r="3"/>
+        <circle cx="150" cy="320" r="3"/><circle cx="250" cy="320" r="3"/>
+      </g>
+    </svg>
+    <div class="loader__meta">
+      <span class="mono">RODMAN / ПЯТИГОРСК</span>
+      <span class="mono loader__status">Варим атмосферу</span>
+      <span class="loader__count mono"><b>0</b>%</span>
+    </div>
+  </div>
+
+  <!-- ============ Переход «волна кофе» между разделами ============ -->
+  <div class="pour" aria-hidden="true">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="pour__wave pour__wave--top"><path d="M0,160 C240,260 480,60 720,160 C960,260 1200,60 1440,160 L1440,320 L0,320 Z"/></svg>
+    <div class="pour__body"><span class="pour__label"></span></div>
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="pour__wave pour__wave--bottom"><path d="M0,160 C240,60 480,260 720,160 C960,60 1200,260 1440,160 L1440,0 L0,0 Z"/></svg>
+  </div>
+
+  <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"><em class="cursor__label"></em></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <a href="#top" class="nav__logo" data-pour>RODMAN<span>coffee</span></a>
+    <nav class="nav__links" aria-label="Разделы">
+      <a href="#day" data-pour>День</a>
+      <a href="#company" data-pour>С кем</a>
+      <a href="#menu" data-pour>Меню</a>
+      <a href="#people" data-pour>Люди</a>
+      <a href="#contacts" data-pour>Контакты</a>
+    </nav>
+    <div class="nav__right">
+      <div class="cup-progress" title="Сколько кофе вы уже «выпили» листая сайт">
+        <svg viewBox="0 0 40 40" aria-hidden="true">
+          <defs><clipPath id="cupClip"><path d="M9 12 h19 v11 a9.5 9.5 0 0 1 -19 0 z"/></clipPath></defs>
+          <g clip-path="url(#cupClip)"><rect class="cup-progress__fill" x="0" y="0" width="40" height="40"/></g>
+          <path d="M9 12 h19 v11 a9.5 9.5 0 0 1 -19 0 z" class="cup-progress__line"/>
+          <path d="M28 15 h3 a4 4 0 0 1 0 8 h-3" class="cup-progress__line"/>
+          <path class="cup-progress__steam" d="M15 8 q-2 -2 0 -4 M21 8 q-2 -2 0 -4"/>
+        </svg>
+        <span class="mono cup-progress__val">0%</span>
+      </div>
+      <a class="btn btn--small" href="tel:+79397771474">Позвонить</a>
+      <button class="nav__burger" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="drawer" aria-hidden="true">
+    <nav class="drawer__links">
+      <a href="#day" data-pour><i class="mono">01</i>Один день</a>
+      <a href="#company" data-pour><i class="mono">02</i>С кем придёте</a>
+      <a href="#menu" data-pour><i class="mono">03</i>Меню</a>
+      <a href="#people" data-pour><i class="mono">04</i>Люди</a>
+      <a href="#contacts" data-pour><i class="mono">05</i>Контакты</a>
+    </nav>
+    <div class="drawer__foot mono">пр. Кирова, 87А · <a href="tel:+79397771474">+7 939 777-14-74</a></div>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ HERO: лампа, которая «включает» уют ============ -->
+    <section class="hero">
+      <div class="hero__stage">
+        <img class="hero__img hero__img--dark" src="https://avatars.mds.yandex.net/get-altay/6410060/2a000001808e8315f238a67b575228a07afe/XXXL" alt="">
+        <img class="hero__img hero__img--lit" src="https://avatars.mds.yandex.net/get-altay/6410060/2a000001808e8315f238a67b575228a07afe/XXXL" alt="Гостья RODMAN за столиком у кирпичной стены">
+        <div class="hero__vignette"></div>
+      </div>
+
+      <div class="hero__content">
+        <p class="hero__kicker mono"><span class="dot-live"></span>Кофейня &amp; кондитерская · Пятигорск</p>
+        <h1 class="hero__title">
+          <span class="line"><span class="line__in">Кофе&nbsp;—</span></span>
+          <span class="line"><span class="line__in"><em>повод</em></span></span>
+          <span class="line line--rotator"><span class="line__in rotator" data-words="встретиться,поговорить,остаться,вернуться,влюбиться,помолчать">встретиться</span></span>
+        </h1>
+      </div>
+
+      <div class="hero__bottom">
+        <p class="hero__addr">проспект Кирова, 87А<br><span class="muted">каждый день · до полуночи</span></p>
+        <div class="hero__hint mono"><span class="hero__hint-line"></span>води курсором — включай свет</div>
+        <a class="hero__rating" href="https://yandex.ru/maps/org/212009351928" target="_blank" rel="noopener">
+          <b>4.9</b><span>★★★★★<br><span class="muted">376 отзывов на Яндекс Картах</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ MANIFESTO: слова загораются при скролле ============ -->
+    <section class="manifesto">
+      <p class="manifesto__eyebrow mono">(01) — о нас</p>
+      <p class="manifesto__text" data-words-reveal>
+        Мы&nbsp;не&nbsp;просто варим кофе. Мы держим для&nbsp;вас столик
+        <span class="pill"><img src="https://avatars.mds.yandex.net/get-maps-adv-crm/3888992/2a000001808b169e44042cb4f8a2eb4aef4f/landing_background" alt=""></span>
+        у&nbsp;окна, помним, что&nbsp;вы любите раф с&nbsp;корицей,
+        <span class="pill"><img src="https://avatars.mds.yandex.net/get-altay/5448678/2a000001808e84e3180e1f390903649da75f/L" alt=""></span>
+        и&nbsp;зажигаем неон, когда на&nbsp;Кирова темнеет.
+        <span class="pill"><img src="https://avatars.mds.yandex.net/get-altay/6119709/2a000001808e85c3b6767638e8b2d2e2145a/L" alt=""></span>
+        RODMAN&nbsp;— место, где&nbsp;встречаются.
+      </p>
+      <div class="manifesto__facts">
+        <div class="fact"><b data-count="4.9" data-decimals="1">4.9</b><span>рейтинг на Яндекс Картах</span></div>
+        <div class="fact"><b data-count="376">376</b><span>тёплых отзывов гостей</span></div>
+        <div class="fact"><b data-count="60" data-suffix="+">60+</b><span>напитков и десертов в меню</span></div>
+        <div class="fact"><b>00:00</b><span>закрываемся, когда город засыпает</span></div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-label="Удобства">
+      <div class="marquee__track">
+        <div class="marquee__group"><span>Летняя веранда</span><i>✺</i><span>Wi‑Fi</span><i>✺</i><span>Кофе с собой</span><i>✺</i><span>Детское меню</span><i>✺</i><span>Авторские десерты</span><i>✺</i><span>Оплата картой</span><i>✺</i><span>Парковка</span><i>✺</i><span>Еда навынос</span><i>✺</i></div>
+        <div class="marquee__group" aria-hidden="true"><span>Летняя веранда</span><i>✺</i><span>Wi‑Fi</span><i>✺</i><span>Кофе с собой</span><i>✺</i><span>Детское меню</span><i>✺</i><span>Авторские десерты</span><i>✺</i><span>Оплата картой</span><i>✺</i><span>Парковка</span><i>✺</i><span>Еда навынос</span><i>✺</i></div>
+      </div>
+    </div>
+
+    <!-- ============ ОДИН ДЕНЬ: горизонтальный скролл, небо меняется ============ -->
+    <section class="day" id="day">
+      <div class="day__sky">
+        <div class="day__sun"></div>
+        <svg class="day__garland" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-20 20 Q 360 170 720 40 T 1460 30" />
+          <g class="day__bulbs"></g>
+        </svg>
+      </div>
+      <div class="day__head">
+        <p class="mono">(02) — один день в RODMAN</p>
+        <p class="day__clock mono"><span class="day__clock-val">08:00</span></p>
+      </div>
+      <div class="day__track">
+        <article class="day__panel">
+          <div class="day__time">08:00</div>
+          <div class="day__body">
+            <h3>Первый <em>эспрессо</em></h3>
+            <p>Город ещё просыпается, а у нас уже пахнет свежемолотым. Флэт уайт по дороге на работу или десять минут тишины у окна — день начнётся правильно.</p>
+            <p class="day__order mono">Советуем: Флэт уайт · 250 ₽</p>
+          </div>
+          <figure class="day__photo"><img src="https://avatars.mds.yandex.net/get-altay/5448678/2a000001808e84e3180e1f390903649da75f/L" alt="Бариста взбивает молоко" loading="lazy"></figure>
+        </article>
+        <article class="day__panel">
+          <div class="day__time">13:00</div>
+          <div class="day__body">
+            <h3>Обед <em>без спешки</em></h3>
+            <p>Сэндвич с сёмгой, сырники и латте — здесь или с собой. Wi‑Fi быстрый, розетки есть, никто не торопит.</p>
+            <p class="day__order mono">Советуем: Сэндвич с сёмгой · 450 ₽</p>
+          </div>
+          <figure class="day__photo"><img src="https://avatars.mds.yandex.net/get-altay/5469293/2a000001808e863ac5051b12b235b0c28af3/L" alt="Капучино рядом с ноутбуком" loading="lazy"></figure>
+        </article>
+        <article class="day__panel">
+          <div class="day__time">17:30</div>
+          <div class="day__body">
+            <h3>Веранда <em>и лимонады</em></h3>
+            <p>Большая летняя веранда, гранат‑юдзу со льдом и разговоры, которые совсем не хочется заканчивать.</p>
+            <p class="day__order mono">Советуем: Лимонад гранат‑юдзу · 330 ₽</p>
+          </div>
+          <figure class="day__photo"><img src="https://avatars.mds.yandex.net/get-altay/6237886/2a000001808e86fc19e3fe7eed399de750e8/L" alt="Летняя веранда кофейни" loading="lazy"></figure>
+        </article>
+        <article class="day__panel day__panel--night">
+          <div class="day__time">22:00</div>
+          <div class="day__body">
+            <h3>Гирлянды <em>на Кирова</em></h3>
+            <p>Горит красный неон, на проспекте зажглись огни. Раф халвичный, чизкейк на двоих — и самое время для «ещё по одной».</p>
+            <p class="day__order mono">Советуем: Раф халвичный · 350 ₽</p>
+          </div>
+          <figure class="day__photo"><img src="https://avatars.mds.yandex.net/get-altay/6057477/2a000001808e8537a373b26f52b968e0525b/L" alt="Вечерний проспект Кирова в гирляндах" loading="lazy"></figure>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ С КЕМ ПРИДЁТЕ: интерактивный столик ============ -->
+    <section class="company" id="company">
+      <div class="company__head">
+        <p class="mono">(03) — подберём столик</p>
+        <h2 class="split-title">С&nbsp;кем вы <em>сегодня?</em></h2>
+      </div>
+      <div class="company__chips" role="tablist" aria-label="Компания">
+        <button class="chip is-active" data-mode="solo" role="tab" aria-selected="true">Один&nbsp;/&nbsp;одна</button>
+        <button class="chip" data-mode="date" role="tab" aria-selected="false">Вдвоём</button>
+        <button class="chip" data-mode="friends" role="tab" aria-selected="false">Компанией</button>
+        <button class="chip" data-mode="kids" role="tab" aria-selected="false">С детьми</button>
+        <button class="chip" data-mode="work" role="tab" aria-selected="false">С ноутбуком</button>
+      </div>
+      <div class="company__grid">
+        <div class="table-viz" aria-hidden="true">
+          <svg viewBox="0 0 500 500">
+            <defs>
+              <radialGradient id="wood" cx="45%" cy="40%" r="65%">
+                <stop offset="0%" stop-color="#6b4a33"/><stop offset="70%" stop-color="#3f2a1d"/><stop offset="100%" stop-color="#2a1b12"/>
+              </radialGradient>
+              <radialGradient id="crema" cx="40%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#d9a36c"/><stop offset="100%" stop-color="#7a4a26"/>
+              </radialGradient>
+            </defs>
+            <g class="table-viz__chairs"></g>
+            <circle cx="250" cy="250" r="140" fill="url(#wood)"/>
+            <circle cx="250" cy="250" r="140" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="2"/>
+            <circle cx="250" cy="250" r="118" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1" stroke-dasharray="2 6"/>
+            <g class="table-viz__items"></g>
+          </svg>
+          <div class="table-viz__place mono"></div>
+        </div>
+        <div class="company__card">
+          <p class="company__mood"></p>
+          <ul class="company__order"></ul>
+          <div class="company__total"><span class="mono">примерно на всех</span><b></b></div>
+          <a class="btn" href="tel:+79397771474">Забронировать столик</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ МЕНЮ ============ -->
+    <section class="menu" id="menu">
+      <div class="menu__head">
+        <div>
+          <p class="mono">(04) — меню</p>
+          <h2 class="split-title">Что <em>нальём?</em></h2>
+        </div>
+        <p class="menu__note">Большинство горячих напитков — 350 или 400&nbsp;мл. Бариста поможет выбрать под ваше настроение — просто спросите.</p>
+      </div>
+      <div class="menu__tabs" role="tablist" aria-label="Категории меню"></div>
+      <ol class="menu__list"></ol>
+      <div class="menu__preview" aria-hidden="true"><img alt=""></div>
+    </section>
+
+    <!-- ============ ЛЮДИ ============ -->
+    <section class="people" id="people">
+      <div class="people__text">
+        <p class="mono">(05) — люди</p>
+        <h2 class="split-title">Место делают <em>люди</em></h2>
+        <p>Сюда приходят не&nbsp;только за&nbsp;кофе. Сюда приходят к&nbsp;бариста, которые помнят ваш заказ, подскажут напиток под настроение и&nbsp;нарисуют на&nbsp;пенке что-нибудь на&nbsp;удачу.</p>
+        <blockquote class="people__quote">
+          <p>«Насте особенный привет, кофе с&nbsp;корицей только от&nbsp;неё»</p>
+          <cite class="mono">— Андрей, гость RODMAN</cite>
+        </blockquote>
+        <p class="people__hint mono">↘ тяните фотографии</p>
+      </div>
+      <div class="polaroids" data-cursor="тяни">
+        <figure class="polaroid"><img src="https://avatars.mds.yandex.net/get-altay/6057477/2a000001808e8537a373b26f52b968e0525b/L" alt="Проспект Кирова вечером" draggable="false"><figcaption>вечер на Кирова</figcaption></figure>
+        <figure class="polaroid"><img src="https://avatars.mds.yandex.net/get-altay/5469293/2a000001808e863ac5051b12b235b0c28af3/L" alt="Капучино" draggable="false"><figcaption>пенка на удачу</figcaption></figure>
+        <figure class="polaroid"><img src="https://avatars.mds.yandex.net/get-altay/6237886/2a000001808e86fc19e3fe7eed399de750e8/L" alt="Веранда" draggable="false"><figcaption>веранда в августе</figcaption></figure>
+        <figure class="polaroid"><img src="https://avatars.mds.yandex.net/get-maps-adv-crm/3888992/2a000001808b169e44042cb4f8a2eb4aef4f/landing_background" alt="Зал у окна" draggable="false"><figcaption>тот самый столик у окна</figcaption></figure>
+        <figure class="polaroid"><img src="https://avatars.mds.yandex.net/get-altay/5448678/2a000001808e84e3180e1f390903649da75f/L" alt="Руки бариста" draggable="false"><figcaption>руки, которые варят ваш раф</figcaption></figure>
+        <figure class="polaroid"><img src="https://avatars.mds.yandex.net/get-altay/6119709/2a000001808e85c3b6767638e8b2d2e2145a/L" alt="Барная стойка с неоновой надписью" draggable="false"><figcaption>неон, который видно с Кирова</figcaption></figure>
+        <figure class="polaroid"><img src="https://avatars.mds.yandex.net/get-altay/6410060/2a000001808e8315f238a67b575228a07afe/L" alt="Гостья у кирпичной стены" draggable="false"><figcaption>вторник, 16:40</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- ============ ОТЗЫВЫ-ЧЕКИ ============ -->
+    <section class="reviews">
+      <div class="reviews__head">
+        <p class="mono">(06) — что говорят гости</p>
+        <h2 class="split-title">Нам пишут <em>на чеках</em></h2>
+      </div>
+      <div class="receipts">
+        <div class="receipts__track"></div>
+      </div>
+    </section>
+
+    <!-- ============ КОНТАКТЫ / НОЧЬ ============ -->
+    <section class="contacts" id="contacts">
+      <div class="contacts__bg"><img src="https://avatars.mds.yandex.net/get-altay/6057477/2a000001808e8537a373b26f52b968e0525b/XXXL" alt="" loading="lazy"></div>
+      <div class="neon" aria-label="RODMAN COFFEE">
+        <span class="neon__word" data-flicker>RODMAN</span>
+        <span class="neon__word neon__word--small">COFFEE</span>
+      </div>
+      <div class="contacts__grid">
+        <div class="contacts__info">
+          <p class="mono">(07) — приходите</p>
+          <h2 class="contacts__title">Пятигорск,<br><em>проспект Кирова, 87А</em></h2>
+          <p class="muted">Каждый день до полуночи. Кофе с&nbsp;собой, еда навынос, большая летняя веранда и&nbsp;парковка рядом.</p>
+          <a class="contacts__phone" href="tel:+79397771474">+7 939 777-14-74</a>
+          <div class="contacts__btns">
+            <a class="btn" href="https://yandex.ru/maps?rtext=~44.035473%2C43.056582&mode=route&ruri=~ymapsbm1%3A%2F%2Forg%3Foid%3D212009351928" target="_blank" rel="noopener">Как доехать</a>
+            <a class="btn btn--ghost" href="https://telegram.me/89397771474" target="_blank" rel="noopener">Telegram</a>
+            <a class="btn btn--ghost" href="https://wa.me/89397771474" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+        <div class="contacts__map">
+          <iframe title="RODMAN Coffee на карте" src="https://yandex.ru/map-widget/v1/?ll=43.056582%2C44.035473&z=17&pt=43.056582%2C44.035473%2Cpm2rdm" loading="lazy" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__big" aria-hidden="true">RODMAN</div>
+    <div class="footer__row mono">
+      <span>© RODMAN Coffee, Пятигорск</span>
+      <span>ИП Родман Роман Борисович · ОГРНИП 317265100098733 · ИНН 263011670609</span>
+      <a href="#top" data-pour>Наверх ↑</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
