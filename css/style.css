@@ -297,7 +297,9 @@ html:not(.js) .loader { display: none; }
 /* =========================================================
    DAY — горизонтальный таймлайн
    ========================================================= */
-.day { position: relative; overflow: hidden; background: #f4e3c8; color: var(--ink); --fg: var(--ink); }
+/* регистрируем --day-fg как цвет, чтобы переключение тёмный ↔ светлый шло плавно */
+@property --day-fg { syntax: '<color>'; inherits: true; initial-value: #120d0a; }
+.day { position: relative; overflow: hidden; background: #f4e3c8; color: var(--ink); --day-fg: var(--ink); transition: --day-fg .6s ease; }
 .day__sky { position: absolute; inset: 0; pointer-events: none; }
 .day__sun {
   position: absolute; width: clamp(120px, 16vw, 240px); aspect-ratio: 1; border-radius: 50%;
@@ -307,14 +309,14 @@ html:not(.js) .loader { display: none; }
 .day__garland { position: absolute; left: 0; top: 0; width: 100%; height: 26vh; opacity: 0; }
 .day__garland path { fill: none; stroke: rgba(242,232,218,.35); stroke-width: 1.2; }
 .day__bulbs circle { fill: #ffd98a; filter: drop-shadow(0 0 6px #ffb347); }
-.day__head { position: absolute; top: 90px; left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; z-index: 2; color: var(--fg); }
+.day__head { position: absolute; top: 90px; left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; z-index: 2; color: var(--day-fg); }
 .day__head p { margin: 0; }
 .day__clock-val { font-size: 14px; }
 .day__track { display: flex; width: max-content; height: 100svh; position: relative; z-index: 1; }
 .day__panel {
   width: 100vw; height: 100%; padding: 170px var(--pad) var(--pad);
   display: grid; grid-template-columns: 1.1fr 1fr; grid-template-rows: auto 1fr; gap: 0 clamp(24px, 5vw, 80px);
-  color: var(--fg);
+  color: var(--day-fg);
 }
 .day__time { grid-column: 1 / -1; font-family: var(--f-serif); font-size: clamp(90px, 17vw, 280px); line-height: .8; letter-spacing: -.05em; }
 .day__body { align-self: end; max-width: 520px; }
@@ -334,12 +336,12 @@ html:not(.js) .loader { display: none; }
   .day__photo { width: 100%; justify-self: stretch; margin-top: 28px; aspect-ratio: 4/3.4; }
   /* overflow: clip вместо hidden — иначе sticky внутри не работает */
   .day { overflow: clip; }
-  /* небо поверх контента: солнце светит как блик (screen только высветляет), кликам не мешает */
-  .day__sky { position: sticky; top: 0; height: 100svh; margin-bottom: -100svh; z-index: 2; }
+  /* небо с солнцем липнет к экрану; кликам не мешает */
+  .day__sky { position: sticky; top: 0; height: 100svh; margin-bottom: -100svh; z-index: 1; }
   .day__sun { width: 120px; mix-blend-mode: screen; }
-  /* слои: фото (1) < солнце (2) < текст (3); у трека убираем свой stacking context */
+  /* слои: солнце (1) < фото (2) < текст (3); у трека убираем свой stacking context */
   .day__track { z-index: auto; }
-  .day__photo { position: relative; z-index: 1; }
+  .day__photo { position: relative; z-index: 2; }
   .day__time, .day__body { position: relative; z-index: 3; }
   /* шире экрана, чтобы лампочки не сплющивались при узкой ширине */
   .day__garland { width: 250%; left: -75%; height: 16vh; }

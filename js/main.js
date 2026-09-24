@@ -426,14 +426,24 @@
   gsap.to('.day__bulbs circle', { opacity: .3, duration: () => .4 + Math.random(), repeat: -1, yoyo: true, stagger: { each: .08, from: 'random' }, ease: 'sine.inOut' });
 
   const skyBg = ['#f4e3c8', '#f3cf96', '#e08c5a', '#8a3b2a', '#16100d'];
-  const skyFg = ['#120d0a', '#120d0a', '#1a0f0a', '#f2e8da', '#f2e8da'];
+  // цвет текста не смешиваем, а выбираем тёмный или светлый — у кого выше контраст с небом (WCAG)
+  const INK = [18, 13, 10], CREAM = [242, 232, 218];
+  const lum = (rgb) => {
+    const [r, g, b] = rgb.map(v => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; });
+    return .2126 * r + .7152 * g + .0722 * b;
+  };
+  const contrast = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + .05) / (y + .05); };
+  let dayFg = '';
   const lerpColor = (arr, p) => {
     const seg = (arr.length - 1) * p, i = Math.min(Math.floor(seg), arr.length - 2);
     return gsap.utils.interpolate(arr[i], arr[i + 1], seg - i);
   };
   const setSky = (p) => {
-    day.style.backgroundColor = lerpColor(skyBg, p);
-    day.style.setProperty('--fg', lerpColor(skyFg, p));
+    const bg = lerpColor(skyBg, p);
+    day.style.backgroundColor = bg;
+    const rgb = bg.match(/[\d.]+/g).slice(0, 3).map(Number);
+    const fg = contrast(rgb, INK) >= contrast(rgb, CREAM) ? '#120d0a' : '#f2e8da';
+    if (fg !== dayFg) { dayFg = fg; day.style.setProperty('--day-fg', fg); }
     const T = [480, 780, 1050, 1320], seg = p * (T.length - 1), k = Math.min(Math.floor(seg), T.length - 2);
     const mins = Math.round((T[k] + (T[k + 1] - T[k]) * (seg - k)) / 5) * 5;
     clock.textContent = `${String(Math.floor(mins / 60)).padStart(2, '0')}:${String(mins % 60).padStart(2, '0')}`;
